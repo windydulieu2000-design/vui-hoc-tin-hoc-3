@@ -1,0 +1,581 @@
+/* Vui học Tin học 3 – Thế giới Robot Pastel (Pastel Robot Adventure World)
+   Bảng màu Pastel Cao Cấp:
+   - Tím lavender: #A78BFA / #8B5CF6
+   - Hồng pastel: #F9A8D4 / #EC4899
+   - Xanh mint: #86EFAC / #10B981
+   - Xanh trời: #93C5FD / #06B6D4
+   - Vàng kem: #FDE68A / #F59E0B
+   - Trắng ngọc trai: #FFFFFF
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700;800&display=swap');
+
+:root {
+  --lavender: #a78bfa;
+  --lavender-light: #ede9fe;
+  --lavender-dark: #6d28d9;
+  --pastel-pink: #f9a8d4;
+  --pastel-pink-light: #fce7f3;
+  --pastel-pink-dark: #be185d;
+  --mint: #86efac;
+  --mint-light: #d1fae5;
+  --mint-dark: #047857;
+  --sky-blue: #93c5fd;
+  --sky-blue-light: #e0f2fe;
+  --sky-blue-dark: #0284c7;
+  --cream-yellow: #fde68a;
+  --cream-yellow-light: #fef3c7;
+  --cream-yellow-dark: #b45309;
+  --pearl-white: #ffffff;
+  --text-main: #332d4b;
+  --text-muted: #64748b;
+  --radius-sm: 12px;
+  --radius-md: 18px;
+  --radius-lg: 24px;
+  --radius-full: 9999px;
+  --shadow-soft: 0 8px 24px rgba(167, 139, 250, 0.12);
+  --shadow-3d: 0 10px 0 #ddd6fe, 0 14px 28px rgba(167, 139, 250, 0.2);
+  --shadow-hover: 0 6px 0 #ddd6fe, 0 10px 20px rgba(167, 139, 250, 0.25);
+  --glass-bg: rgba(255, 255, 255, 0.85);
+  --glass-border: 2px solid rgba(255, 255, 255, 0.7);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Quicksand', system-ui, -apple-system, sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background: linear-gradient(135deg, #f5f2ff 0%, #faf3fa 40%, #f0fdf9 80%, #fefce8 100%);
+  background-attachment: fixed;
+  color: var(--text-main);
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Reduced motion mode for sensitive learners */
+body.reduced-motion *,
+body.reduced-motion *::before,
+body.reduced-motion *::after {
+  animation: none !important;
+  transition: none !important;
+  scroll-behavior: auto !important;
+}
+
+/* Background floating decorative elements */
+.pastel-bg-decor {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.floating-cloud {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.55);
+  border-radius: 50px;
+  filter: blur(1px);
+  animation: floatCloud 25s linear infinite;
+}
+
+.floating-star {
+  position: absolute;
+  color: #fde68a;
+  opacity: 0.6;
+  animation: twinkleStar 4s ease-in-out infinite alternate;
+}
+
+@keyframes floatCloud {
+  0% { transform: translateX(-120px); }
+  100% { transform: translateX(calc(100vw + 120px)); }
+}
+
+@keyframes twinkleStar {
+  0% { transform: scale(0.8) rotate(0deg); opacity: 0.3; }
+  100% { transform: scale(1.2) rotate(15deg); opacity: 0.8; }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #f1edff;
+}
+::-webkit-scrollbar-thumb {
+  background: #c4b5fd;
+  border-radius: var(--radius-full);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #a78bfa;
+}
+
+/* 3D and Glassmorphism Cards */
+.card-glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: var(--glass-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.card-3d {
+  background: #ffffff;
+  border: 2px solid #ede9fe;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 8px 24px rgba(139, 92, 246, 0.08), inset 0 2px 4px rgba(255, 255, 255, 0.8);
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease;
+}
+
+.card-3d:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 30px rgba(139, 92, 246, 0.15);
+}
+
+/* Bouncy Interactive Buttons */
+.btn-bouncy {
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  user-select: none;
+}
+.btn-bouncy:hover:not(:disabled) {
+  transform: translateY(-2px) scale(1.02);
+}
+.btn-bouncy:active:not(:disabled) {
+  transform: translateY(1px) scale(0.98);
+}
+
+/* Primary Action Button 3D Pill */
+.btn-primary-3d {
+  background: linear-gradient(135deg, #a78bfa 0%, #ec4899 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: var(--radius-md);
+  padding: 12px 24px;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 6px 18px rgba(167, 139, 250, 0.35);
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.btn-primary-3d:hover:not(:disabled) {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 24px rgba(167, 139, 250, 0.45);
+}
+.btn-primary-3d:active:not(:disabled) {
+  transform: translateY(1px) scale(0.98);
+}
+
+/* ==========================================================================
+   ROBOT BÉ BÍT - 6 EMOTIONAL STATES CSS ANIMATIONS
+   1. welcome (vui vẻ chào đón)
+   2. thinking (suy nghĩ khi đặt câu hỏi)
+   3. celebrating (vui mừng trả lời đúng)
+   4. encouraging (động viên khi trả lời sai)
+   5. surprised (ngạc nhiên mở khóa bài mới)
+   6. proud (tự hào hoàn thành thử thách)
+   ========================================================================== */
+
+.be-bit-robot {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  user-select: none;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Antenna with glowing orb */
+.be-bit-antenna {
+  width: 6px;
+  height: 20px;
+  background: linear-gradient(to top, #8b5cf6, #c4b5fd);
+  border-radius: 4px;
+  position: relative;
+  margin-bottom: -3px;
+  transform-origin: bottom center;
+  animation: antennaWiggle 3s ease-in-out infinite;
+}
+
+.be-bit-antenna-ball {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #ec4899;
+  box-shadow: 0 0 14px #ec4899;
+  animation: ballGlow 1.5s ease-in-out infinite alternate;
+}
+
+/* Robot Head */
+.be-bit-head {
+  width: 88px;
+  height: 72px;
+  background: linear-gradient(145deg, #ffffff, #ede9fe);
+  border: 4px solid #8b5cf6;
+  border-radius: 22px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 16px rgba(139, 92, 246, 0.15), inset 0 2px 4px rgba(255, 255, 255, 0.9);
+  z-index: 2;
+  transition: transform 0.3s ease;
+}
+
+.be-bit-ear {
+  position: absolute;
+  top: 20px;
+  width: 10px;
+  height: 22px;
+  background: #c4b5fd;
+  border: 3px solid #8b5cf6;
+  border-radius: 6px;
+}
+.be-bit-ear.left { left: -10px; }
+.be-bit-ear.right { right: -10px; }
+
+/* Dark digital face visor */
+.be-bit-face {
+  width: 68px;
+  height: 48px;
+  background: #1e1b4b;
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.be-bit-eyes {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+}
+
+.be-bit-eye {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #38bdf8;
+  box-shadow: 0 0 8px #38bdf8;
+  transition: all 0.25s ease;
+}
+
+.be-bit-cheeks {
+  position: absolute;
+  bottom: 6px;
+  display: flex;
+  gap: 34px;
+}
+
+.be-bit-cheek {
+  width: 6px;
+  height: 4px;
+  border-radius: 50%;
+  background: #f472b6;
+  opacity: 0.7;
+}
+
+.be-bit-mouth {
+  width: 12px;
+  height: 4px;
+  background: #38bdf8;
+  border-radius: 3px;
+  margin-top: 4px;
+  transition: all 0.25s ease;
+}
+
+/* Robot Body */
+.be-bit-body {
+  width: 76px;
+  height: 56px;
+  background: linear-gradient(145deg, #ffffff, #ede9fe);
+  border: 4px solid #8b5cf6;
+  border-radius: 20px;
+  margin-top: -6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 6px 16px rgba(139, 92, 246, 0.12);
+}
+
+.be-bit-screen {
+  width: 48px;
+  height: 32px;
+  background: #f5f3ff;
+  border: 2px solid #c4b5fd;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.06);
+}
+
+.be-bit-arm {
+  position: absolute;
+  top: 10px;
+  width: 10px;
+  height: 30px;
+  background: #c4b5fd;
+  border: 3px solid #8b5cf6;
+  border-radius: 8px;
+  transform-origin: top center;
+  transition: all 0.25s;
+}
+.be-bit-arm.left {
+  left: -12px;
+  animation: armWaveLeft 2.4s ease-in-out infinite;
+}
+.be-bit-arm.right {
+  right: -12px;
+  animation: armWaveRight 2.8s ease-in-out infinite;
+}
+
+/* ==========================================================================
+   MOOD 1: WELCOME (Vui vẻ chào đón)
+   ========================================================================== */
+.be-bit-robot.welcome .be-bit-eye,
+.be-bit-robot.happy .be-bit-eye {
+  border-radius: 0 0 10px 10px;
+  height: 8px;
+  background: #4ade80;
+  box-shadow: 0 0 10px #4ade80;
+}
+.be-bit-robot.welcome .be-bit-mouth,
+.be-bit-robot.happy .be-bit-mouth {
+  width: 16px;
+  height: 8px;
+  background: #4ade80;
+  border-radius: 0 0 12px 12px;
+}
+.be-bit-robot.welcome .be-bit-arm.right {
+  animation: armWaveFast 0.8s ease-in-out infinite;
+}
+
+/* ==========================================================================
+   MOOD 2: THINKING (Suy nghĩ khi đặt câu hỏi)
+   ========================================================================== */
+.be-bit-robot.thinking .be-bit-head {
+  transform: rotate(6deg);
+}
+.be-bit-robot.thinking .be-bit-eye {
+  width: 12px;
+  height: 6px;
+  background: #facc15;
+  box-shadow: 0 0 8px #facc15;
+  animation: eyeLookAround 2s infinite alternate;
+}
+.be-bit-robot.thinking .be-bit-mouth {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #facc15;
+}
+
+/* ==========================================================================
+   MOOD 3: CELEBRATING (Vui mừng khi trả lời đúng)
+   ========================================================================== */
+.be-bit-robot.celebrating {
+  animation: robotHop 0.6s ease-in-out infinite alternate;
+}
+.be-bit-robot.celebrating .be-bit-eye {
+  background: #f43f5e;
+  box-shadow: 0 0 12px #f43f5e;
+  height: 6px;
+  border-radius: 0 0 10px 10px;
+}
+.be-bit-robot.celebrating .be-bit-mouth {
+  width: 18px;
+  height: 10px;
+  background: #f43f5e;
+  border-radius: 0 0 14px 14px;
+}
+.be-bit-robot.celebrating .be-bit-arm.left {
+  animation: armCheerLeft 0.5s ease-in-out infinite alternate;
+}
+.be-bit-robot.celebrating .be-bit-arm.right {
+  animation: armCheerRight 0.5s ease-in-out infinite alternate;
+}
+
+/* ==========================================================================
+   MOOD 4: ENCOURAGING (Động viên khi trả lời sai)
+   ========================================================================== */
+.be-bit-robot.encouraging .be-bit-eye,
+.be-bit-robot.sad .be-bit-eye {
+  border-radius: 10px 10px 0 0;
+  height: 7px;
+  background: #93c5fd;
+  box-shadow: 0 0 8px #93c5fd;
+}
+.be-bit-robot.encouraging .be-bit-mouth,
+.be-bit-robot.sad .be-bit-mouth {
+  width: 10px;
+  height: 4px;
+  border-radius: 4px 4px 0 0;
+  background: #93c5fd;
+}
+.be-bit-robot.encouraging .be-bit-head {
+  transform: translateY(3px);
+}
+
+/* ==========================================================================
+   MOOD 5: SURPRISED (Ngạc nhiên khi mở khóa bài mới)
+   ========================================================================== */
+.be-bit-robot.surprised .be-bit-eye {
+  width: 14px;
+  height: 14px;
+  background: #38bdf8;
+  box-shadow: 0 0 12px #38bdf8;
+  animation: eyePop 0.8s infinite alternate;
+}
+.be-bit-robot.surprised .be-bit-mouth {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #38bdf8;
+}
+.be-bit-robot.surprised .be-bit-antenna {
+  animation: antennaVibrate 0.3s ease-in-out infinite;
+}
+
+/* ==========================================================================
+   MOOD 6: PROUD (Tự hào khi hoàn thành thử thách)
+   ========================================================================== */
+.be-bit-robot.proud .be-bit-head {
+  transform: translateY(-4px);
+}
+.be-bit-robot.proud .be-bit-eye {
+  background: #fbbf24;
+  box-shadow: 0 0 12px #fbbf24;
+  height: 8px;
+  border-radius: 0 0 8px 8px;
+}
+.be-bit-robot.proud .be-bit-mouth {
+  width: 16px;
+  height: 8px;
+  background: #fbbf24;
+  border-radius: 0 0 10px 10px;
+}
+.be-bit-robot.proud .be-bit-screen {
+  background: #fef3c7;
+  border-color: #f59e0b;
+  animation: heartPulse 1.2s infinite;
+}
+
+/* ==========================================================================
+   KEYFRAME ANIMATIONS
+   ========================================================================== */
+@keyframes antennaWiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-8deg); }
+  75% { transform: rotate(8deg); }
+}
+
+@keyframes antennaVibrate {
+  0%, 100% { transform: rotate(-5deg); }
+  50% { transform: rotate(5deg); }
+}
+
+@keyframes ballGlow {
+  from { opacity: 0.7; transform: translateX(-50%) scale(0.9); }
+  to { opacity: 1; transform: translateX(-50%) scale(1.2); }
+}
+
+@keyframes eyeLookAround {
+  0% { transform: translateX(-4px); }
+  100% { transform: translateX(4px); }
+}
+
+@keyframes eyePop {
+  0% { transform: scale(0.9); }
+  100% { transform: scale(1.15); }
+}
+
+@keyframes robotHop {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-8px); }
+}
+
+@keyframes armWaveLeft {
+  0%, 100% { transform: rotate(10deg); }
+  50% { transform: rotate(-25deg); }
+}
+
+@keyframes armWaveRight {
+  0%, 100% { transform: rotate(-10deg); }
+  50% { transform: rotate(35deg); }
+}
+
+@keyframes armWaveFast {
+  0%, 100% { transform: rotate(-15deg); }
+  50% { transform: rotate(60deg); }
+}
+
+@keyframes armCheerLeft {
+  0% { transform: rotate(-70deg); }
+  100% { transform: rotate(-110deg); }
+}
+
+@keyframes armCheerRight {
+  0% { transform: rotate(70deg); }
+  100% { transform: rotate(110deg); }
+}
+
+@keyframes heartPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
+/* Speech indicator pulse */
+.speaking-pulse {
+  animation: speechPulse 1.2s infinite;
+}
+@keyframes speechPulse {
+  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(236, 72, 153, 0.4); }
+  70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(236, 72, 153, 0); }
+  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(236, 72, 153, 0); }
+}
+
+/* Print styles for Teacher's Report */
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .print-only {
+    display: block !important;
+  }
+  .teacher-report-card {
+    border: 1px solid #ddd !important;
+    box-shadow: none !important;
+    page-break-inside: avoid;
+  }
+}
